@@ -8,11 +8,11 @@ public class Plane implements Geometry
     Point3D _p;
     Vector _normal;
 
-    public Plane(Point3D _p, Vector _normal) {
+    public Plane(Point3D _p, Vector _normal) {/**constructor */
         this._p = _p;
         this._normal = _normal;
     }
-    public  Plane(Point3D p1,Point3D p2,Point3D p3)
+    public  Plane(Point3D p1,Point3D p2,Point3D p3)/**constructor*/
     {
         _p=p1;
         _normal=null;
@@ -20,7 +20,7 @@ public class Plane implements Geometry
 
 
     @Override
-    public Vector getNormal(Point3D p) {
+    public Vector getNormal(Point3D p) {/**returns the normal*/
 
             /*Vector U = new Vector (_p1, _p2);
             Vector V = new Vector (_p1, _p3);

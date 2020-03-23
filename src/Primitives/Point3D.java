@@ -18,20 +18,20 @@ public class Point3D {
 
     public final static Point3D ZERO = new Point3D(0.0,0.0,0.0);
 
-    public Point3D(Coordinate _x, Coordinate _y, Coordinate _z) {
+    public Point3D(Coordinate _x, Coordinate _y, Coordinate _z) {/**constructor of point 3D that receives three coordinates*/
         this._x = _x;
         this._y = _y;
         this._z = _z;
     }
-    public Point3D(double _x, double _y, double _z) {
+    public Point3D(double _x, double _y, double _z) {/**constructor*/
         this(new Coordinate(_x),new Coordinate(_y),new Coordinate(_z));
     }
 
-    public Point3D(Point3D other)
+    public Point3D(Point3D other)/**constructor*/
     {
      this(other._x,other._y,other._z);
     }
-
+/**getters*/
     public Coordinate get_x() {
         return _x;
     }
@@ -45,7 +45,7 @@ public class Point3D {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) {/**compares between this and obj*/
 
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -64,7 +64,7 @@ public class Point3D {
                 ", _z=" + _z +
                 '}';
     }
-    public Vector subtract(Point3D p)
+    public Vector subtract(Point3D p)/**subtracts p from this and creates and returns a new vector*/
     {
         return new Vector(new Point3D(
                 this._x._coord - p._x._coord,
@@ -72,15 +72,15 @@ public class Point3D {
                 this._z._coord - p._z._coord));
     }
 
-    public Point3D add(Vector v)
+    public Point3D add(Vector v)/**adds v to this vector and returns a 3D point*/
     {
-        return new Point3D(v._head._x._coord+this._x._coord,v._head._y._coord+_y._coord,v._head._z._coord+_z._coord);
+        return new Point3D(v._head._x._coord+this._x._coord,v._head._y._coord+_y._coord,v._head._z._coord+_z._coord);/**creates a new point3D*/
     }
-    public double distanceSquared(Point3D p)
+    public double distanceSquared(Point3D p)/**distance between p and this point and then squares the result*/
     {
         return (this._x._coord-p._x._coord)*(this._x._coord-p._x._coord)+(this._y._coord-p._y._coord)*(this._y._coord-p._y._coord)+(this._z._coord-p._z._coord)*(this._z._coord-p._z._coord);
     }
-    public double distance(Point3D p)
+    public double distance(Point3D p)/** calculates distance by square root of previous function*/
     {
         return Math.sqrt(this.distanceSquared(p));
     }

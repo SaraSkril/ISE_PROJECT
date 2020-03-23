@@ -45,11 +45,11 @@ public final class Coordinate {
 
     /*************** Admin *****************/
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj) {/**compares between this and obj, returns true if equal false otherwise*/
         if (this == obj) return true;
         if (obj == null) return false;
         if (!(obj instanceof Coordinate)) return false;
-        return isZero(_coord - ((Coordinate)obj)._coord);
+        return isZero(_coord - ((Coordinate)obj)._coord);/**checks if have the same value*/
     }
 
     @Override
