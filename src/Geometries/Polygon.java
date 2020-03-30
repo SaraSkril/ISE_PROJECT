@@ -1,9 +1,6 @@
 package Geometries;
 
 import java.util.List;
-
-import Primitives.Point3D;
-import Primitives.Vector;
 import Primitives.*;
 import static Primitives.Util.*;
 
@@ -11,7 +8,7 @@ import static Primitives.Util.*;
  * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
  *
- * @author Elisheva Aronstam and Sara Raizel Skriloff
+ * @author Dan
  */
 public class Polygon implements Geometry {
     /**
@@ -41,6 +38,7 @@ public class Polygon implements Geometry {
      *                                  <li>Three consequent vertices lay in the
      *                                  same line (180&#176; angle between two
      *                                  consequent edges)
+     *                                  <li>The polygon is concave (not convex></li>
      *                                  </ul>
      */
     public Polygon(Point3D... vertices) {
@@ -83,10 +81,7 @@ public class Polygon implements Geometry {
     }
 
     @Override
-    public Vector getNormal(Point3D point)
-    {
+    public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
-
-
 }
