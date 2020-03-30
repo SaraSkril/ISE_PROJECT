@@ -38,8 +38,15 @@ public class Vector
     {
         return new Vector(this._head._x._coord-v._head._x._coord,this._head._y._coord-v._head._y._coord,this._head._z._coord-v._head._z._coord);
     }
-    public Vector add(Vector v) {/**adds this to v and returns the vector*/
-        return new Vector(this._head._x._coord+v._head._x._coord,this._head._y._coord+v._head._y._coord,this._head._z._coord+v._head._z._coord);
+    public Vector add(Vector v)
+    {/**adds this to v and returns the vector*/
+    try {
+        return new Vector(this._head._x._coord + v._head._x._coord, this._head._y._coord + v._head._y._coord, this._head._z._coord + v._head._z._coord);
+    }
+    //throws exception if the addition created (0,0,0)
+    catch (IllegalArgumentException ex) {
+        throw ex;
+    }
     }
     public Vector scale(double s)
     {return new Vector(_head._x._coord*s,_head._y._coord*s,_head._z._coord*s);
