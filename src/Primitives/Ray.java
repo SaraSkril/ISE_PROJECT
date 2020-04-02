@@ -23,4 +23,12 @@ public class Ray {
         this._point = new Point3D(other._point);
         this._direction = other._direction.normalized();
     }
+
+    public Point3D get_point() {
+        return _point;
+    }
+
+    public Vector get_direction() {
+        return _direction;
+    }
 }
