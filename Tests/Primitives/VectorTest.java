@@ -14,26 +14,38 @@ public class VectorTest {
         */
 
        // ============ Equivalence Partitions Tests ==============
-       // TC01:General Test 1
+       // TC01:General Test 1 - adds to vectors in 1st quarter
      Vector v1 = new Vector(1.0, 1.0, 1.0);
-     Vector v2 = new Vector(-1.0, -1.0, -1.5);
+     Vector v2 = new Vector(1.0, 1.0, 1.0);
      Vector v3 = v1.add(v2);
-     //TC02: General Test 2
-     assertEquals(new Vector(0.0,0.0,-0.5),v3);
-       v3 = v2.add(v1);
-       assertEquals(new Vector(-1.0, -1.0, -2.0),v3);
-       // =============== Boundary Values Tests ==================
+     assertEquals("Unexpected output", new Vector(2.0, 2.0, 2.0),v3);
 
-     // TC03: checks that will not create vector 0
-     Vector v4=new Vector(-1.0,-1.0,-1.0);
-     try {
-         v3=v1.add(v4);
-         fail("Point3D(0.0,0.0,0.0) not valid for vector head");
-     }
-     catch (IllegalArgumentException ex)
-     {
-         assertEquals("Not Allowed", ex.getMessage());
-     }
+       // =============== Boundary Values Tests ==================
+       //TC02: checks we dont create the ZERO vector
+       Vector v4=new Vector(-1.0,-1.0,-1.0);
+       try {
+           v3=v1.add(v4);
+           fail("Point3D(0.0,0.0,0.0) not valid for vector head");
+       }
+       catch (IllegalArgumentException ex)
+       {
+           assertTrue(ex.getMessage(),true);
+       }
+       //TC03: Checks if adding a minus to plus vector work
+       Vector v5= new Vector(-0.5,-0.5,-0.5);
+       v3= v1.add(v5);
+       assertEquals("Unexpected output, adding opposite signs", new Vector(0.5, 0.5, 0.5),v3);
+
+       //TC04: Checks if adding a plus to minus vector work
+       v3= v5.add(v1);
+       assertEquals("Unexpected output, adding opposite signs", new Vector(0.5, 0.5, 0.5),v3);
+
+       //TC05: Checks if adding a minus to minus vector work
+       Vector v6= new Vector(-0.5,-0.5,-0.5);
+       v3= v6.add(v5);
+       assertEquals("Unexpected output, adding minus signs", new Vector(-1.0, -1.0, -1.0),v3);
+
+
    }
     @Test
     public void subtract()
@@ -42,36 +54,66 @@ public class VectorTest {
          * Test method for {@link Primitives.Vector#substract(Primitives.Vector)}.
          */
         // ============ Equivalence Partitions Tests ==============
-        // TC01:General Test 1
-        Vector v1 = new Vector(1.0, 1.0, 1.0);
-        Vector v2 = new Vector(-1.0, -1.0, -1.5);
+        // TC01:General Test 1 - substracts to vectors in 1st quarter
+        Vector v1 = new Vector(2.0, 2.0, 2.0);
+        Vector v2 = new Vector(1.0, 1.0, 1.0);
         Vector v3 = v1.subtract(v2);
-        //TC02: General Test 2
-        assertEquals(new Vector(2.0,0.0,2.5),v3);
-        v3 = v2.subtract(v1);
-        assertEquals(new Vector(-2.0, -2.0, -2.5),v3);
-        // =============== Boundary Values Tests ==================
+        assertEquals("Unexpected output", new Vector(1.0, 1.0, 1.0),v3);
 
-        // TC03: checks that will not create vector 0
-        Vector v4=v1;
+        // =============== Boundary Values Tests ==================
+        //TC02: checks we dont create the ZERO vector
+        Vector v4=new Vector(1.0,1.0,1.0);
         try {
-            v3=v1.subtract(v4);
+            v3=v2.subtract(v4);
             fail("Point3D(0.0,0.0,0.0) not valid for vector head");
         }
         catch (IllegalArgumentException ex)
         {
-            assertEquals("Not Allowed", ex.getMessage());
+            assertTrue(ex.getMessage(),true);
         }
+        //TC03: Checks if substracting a minus to plus vector work
+        Vector v5= new Vector(-0.5,-0.5,-0.5);
+        v3= v1.subtract(v5);
+        assertEquals("Unexpected output, adding opposite signs", new Vector(2.5, 2.5, 2.5),v3);
 
+        //TC04: Checks if sub a plus to minus vector work
+        v3= v5.subtract(v1);
+        assertEquals("Unexpected output, adding opposite signs", new Vector(-2.5, -2.5, -2.5),v3);
+
+        //TC05: Checks if adding a minus to minus vector work
+        Vector v6= new Vector(-1.5,-1.5,-1.5);
+        v3= v6.subtract(v5);
+        assertEquals("Unexpected output, adding minus signs", new Vector(-1.0, -1.0, -1.0),v3);
 
     }
 
     @Test
-    public void scale() {
+    public void scale()
+    {
+        // ============ Equivalence Partitions Tests ==============
+        // TC01:General Test 1 - scales with a positive scalar
+        Vector v1 = new Vector(1.0, 1.0, 1.0);
+        Vector v3 = v1.scale(2);
+        assertEquals("Unexpected output, scaling with positive sign scalar", new Vector(2.0, 2.0, 2.0),v3);
+
+        // =============== Boundary Values Tests ==================
+        //TC02: checks we dont create the ZERO vector
+        try {
+            v3=v1.scale(0);
+            fail("Point3D(0.0,0.0,0.0) not valid for vector head");
+        }
+        catch (IllegalArgumentException ex)
+        {
+            assertTrue(ex.getMessage(),true);
+        }
+        //TC03: Checks if scaling with a negetive scalar
+        v3= v1.scale(-1);
+        assertEquals("Unexpected output, scaling with negative sign scalar", new Vector(-1.0, -1.0, -1.0),v3);
     }
 
     @Test
-    public void crossProduct() {
+    public void crossProduct()
+    {
     }
 
     @Test

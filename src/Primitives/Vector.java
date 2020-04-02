@@ -49,7 +49,8 @@ public class Vector
     }
     }
     public Vector scale(double s)
-    {return new Vector(_head._x._coord*s,_head._y._coord*s,_head._z._coord*s);
+    {
+        return new Vector(_head._x._coord*s,_head._y._coord*s,_head._z._coord*s);
     }
     public double dotProduct(Vector v)
     {
