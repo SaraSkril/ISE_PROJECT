@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 public class TubeTest {
 
     @Test
-    public void getNormal() {
+    public void getNormalTest() {
+
+
     }
 }

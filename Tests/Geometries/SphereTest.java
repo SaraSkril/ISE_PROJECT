@@ -7,9 +7,10 @@ import static org.junit.Assert.*;
 
 public class SphereTest {
 
-    @Test
+
+   /** @Test
     public void get_radius() {
-    }
+    }*/
 
     @Test
     public void getNormal() {
