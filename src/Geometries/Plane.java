@@ -10,12 +10,17 @@ public class Plane implements Geometry
 
     public Plane(Point3D _p, Vector _normal) {/**constructor */
         this._p = _p;
-        this._normal = _normal;
+        this._normal = new Vector(_normal);
     }
     public  Plane(Point3D p1,Point3D p2,Point3D p3)/**constructor*/
     {
         _p=p1;
-        _normal=null;
+        Vector U = new Vector(p1.subtract(p2));
+        Vector V = new Vector(p1.subtract(p3));
+        Vector N = U.crossProduct(V);
+        N.normalize();
+
+        _normal = N.scale(-1);
     }
 
 
