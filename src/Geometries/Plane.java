@@ -2,6 +2,7 @@ package Geometries;
 
 import Primitives.Point3D;
 import Primitives.Ray;
+import Primitives.Util;
 import Primitives.Vector;
 
 import java.util.List;
@@ -41,6 +42,19 @@ public class Plane implements Geometry
 
     @Override
     public List<Point3D> findIntsersections(Ray ray) {
-        return null;
+        Vector p0Q;
+        try {
+            p0Q = _p.subtract(ray.get_point());
+        } catch (IllegalArgumentException e) {
+            return null; // ray starts from point Q - no intersections
+        }
+
+        double nv = _normal.dotProduct(ray.get_direction());
+        if (Util.isZero(nv)) // ray is parallel to the plane - no intersections
+            return null;
+
+        double t = Util.alignZero(_normal.dotProduct(p0Q) / nv);
+
+        return t <= 0 ? null : List.of(ray.getTargetPoint(t));
     }
 }
