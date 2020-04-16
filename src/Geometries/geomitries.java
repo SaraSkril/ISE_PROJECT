@@ -13,7 +13,7 @@ public class geomitries implements Intersectable
 
     public geomitries(Intersectable... Geometries)
     {
-        shapes=new  LinkedList<Intersectable>();
+        shapes=new LinkedList<Intersectable>();
         /** LinkedList chosen over ArrayList because it is easier to insert and delete items **/
         if (Geometries.length > 0)
             add(Geometries);
@@ -23,4 +23,10 @@ public class geomitries implements Intersectable
 
     }
 
+
+    @Override
+    public List<Point3D> findIntsersections(Ray ray)
+    {
+        return null;
+    }
 }
