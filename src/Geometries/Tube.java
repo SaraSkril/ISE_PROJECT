@@ -3,6 +3,9 @@ import Primitives.Point3D;
 import Primitives.Ray;
 import Primitives.Util;
 import Primitives.Vector;
+
+import java.util.List;
+
 /**
  * Class Tube is the basic class representing tube
  *Cylinder extends Radial Geometry
@@ -44,4 +47,8 @@ public class Tube extends RadialGeometry
     }
 
 
+    @Override
+    public List<Point3D> findIntsersections(Ray ray) {
+        return null;
+    }
 }

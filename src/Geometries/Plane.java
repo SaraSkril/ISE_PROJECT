@@ -1,7 +1,10 @@
 package Geometries;
 
 import Primitives.Point3D;
+import Primitives.Ray;
 import Primitives.Vector;
+
+import java.util.List;
 
 public class Plane implements Geometry
 {
@@ -27,20 +30,17 @@ public class Plane implements Geometry
     @Override
     public Vector getNormal(Point3D p) {/**returns the normal*/
 
-            /*Vector U = new Vector (_p1, _p2);
-            Vector V = new Vector (_p1, _p3);
-            Vector N = new Vector (U.crossProduct(V));
-
-            N.normalize();
-            N.scale(-1);
-            return N;*/
-            return null;
-
+            return this.getNormal();
 
     }
 
     public Vector getNormal()
     {
-        return getNormal(null);
+        return _normal;
+    }
+
+    @Override
+    public List<Point3D> findIntsersections(Ray ray) {
+        return null;
     }
 }
