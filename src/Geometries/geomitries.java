@@ -18,8 +18,12 @@ public class geomitries implements Intersectable
         if (Geometries.length > 0)
             add(Geometries);
     }
-    public void add(Intersectable… Geometries)
+    public void add(Intersectable... Geometries)
     {
+        for (Intersectable var : Geometries)
+        {
+            shapes.add(var);
+        }
 
     }
 
