@@ -23,7 +23,7 @@ public class Cylinder extends Tube
     @Override
     public Vector getNormal(Point3D p)
     {
-        Point3D o = axisRay.get_point();
+        Point3D o = axisRay.getPoint(0);
         Vector v = axisRay.get_direction();
 
         // projection of P-O on the ray:

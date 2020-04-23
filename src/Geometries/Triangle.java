@@ -25,7 +25,7 @@ public class Triangle extends Polygon
         List<Point3D> intersections = _plane.findIntsersections(ray);
         if (intersections == null) return null;
 
-        Point3D p0 = ray.get_point();
+        Point3D p0 = ray.getPoint(0);
         Vector v = ray.get_direction();
 
         Vector v1 = _vertices.get(0).subtract(p0);

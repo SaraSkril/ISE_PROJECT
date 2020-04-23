@@ -44,7 +44,7 @@ public class Plane implements Geometry
     public List<Point3D> findIntsersections(Ray ray) {
         Vector p0Q;
         try {
-            p0Q = _p.subtract(ray.get_point());
+            p0Q = _p.subtract(ray.getPoint(0));
         } catch (IllegalArgumentException e) {
             return null; // ray starts from point Q - no intersections
         }
