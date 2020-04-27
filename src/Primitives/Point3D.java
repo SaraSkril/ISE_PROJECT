@@ -84,6 +84,12 @@ public class Point3D {
     {
         return Math.sqrt(this.distanceSquared(p));
     }
+    public Point3D subtract(Vector v) {
+        return new Point3D(this._x._coord - v._head._x._coord,
+                this._y._coord - v._head._y._coord,
+                this._z._coord - v._head._z._coord);
+    }
+
 
 
 }
