@@ -127,4 +127,52 @@ public class integrationTest
         System.out.println("count: "+count);
 
     }
+
+    @Test
+    public void constructRayThroughPixelWithPlane1()
+    {
+        Plane pl= new Plane(new Point3D(2,0,0), new Point3D(2,0,1.34), new Point3D(2,1,0));
+        List<Point3D> results;
+        int count = 0;
+        // TODO explanations
+        int Nx =3;
+        int Ny =3;
+
+        // TODO explanations
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                results = pl.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
+                if (results != null)
+                    count += results.size();
+            }
+        }
+
+        assertEquals("too bad",9,count);
+        System.out.println("count: "+count);
+
+    }
+
+    @Test
+    public void constructRayThroughPixelWithPlane2()
+    {
+        Plane pl= new Plane(new Point3D(0,0,8.88), new Point3D(0,11.45,0), new Point3D(-11.23,0,0));
+        List<Point3D> results;
+        int count = 0;
+        // TODO explanations
+        int Nx =3;
+        int Ny =3;
+
+        // TODO explanations
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                results = pl.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
+                if (results != null)
+                    count += results.size();
+            }
+        }
+
+        assertEquals("too bad",9,count);
+        System.out.println("count: "+count);
+
+    }
 }
