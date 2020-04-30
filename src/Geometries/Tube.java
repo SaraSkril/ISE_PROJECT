@@ -6,6 +6,8 @@ import Primitives.Vector;
 
 import java.util.List;
 
+import static Primitives.Util.isZero;
+
 /**
  * Class Tube is the basic class representing tube
  *Cylinder extends Radial Geometry
@@ -27,28 +29,17 @@ public class Tube extends RadialGeometry
     @Override
     public Vector getNormal(Point3D p)
     {
-        /*The vector from the point of the cylinder to the given point*/
-        Point3D o = new Point3D(axisRay.getPoint(0));
-        Vector v = new Vector(axisRay.get_direction());
-
-        Vector vector1 = p.subtract(o);
-
-        //We need the projection to multiply the _direction unit vector
-        double projection = vector1.dotProduct(v);
-        if(!Util.isZero(projection))
-        {
-            // projection of P-O on the ray:
-            o.add(v.scale(projection));
-        }
-
-        //This vector is orthogonal to the _direction vector.
-        Vector check = p.subtract(o);
-        return check.normalize();
+        double t = axisRay.get_direction().dotProduct(p.subtract(axisRay.getPoint()));
+        Point3D O=axisRay.getPoint();
+        if(!isZero(t));
+        O = O.add( axisRay.get_direction().scale(t));
+        return p.subtract(O).normalize();
     }
 
 
     @Override
     public List<Point3D> findIntsersections(Ray ray) {
+
         return null;
     }
 }

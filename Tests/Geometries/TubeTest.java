@@ -15,9 +15,11 @@ public class TubeTest {
     @Test
     public void getNormalTest()
     {
-        Tube t= new Tube(1.0,new Ray(new Point3D(1.0,0.0,0.0),new Vector(0.0,1.0,0.0)));
-        Vector v = new Vector(new Point3D(1.0,1.0,1.0)).normalize();
-        assertTrue(t.getNormal(new Point3D(2.0,0.0,0.0)).equals(new Vector(new Point3D(1.0,0.0,0.0))));
-        assertTrue(t.getNormal(new Point3D(2.0,1.0,1.0)).equals(v));
+        Vector expected=new Vector(0,1,0);
+        //o=(0,0,5), t=5, po=(0,0,3)  po.normalize=(0,0,1)
+        Tube t1 = new Tube( 5,new Ray(new Point3D(0,0,0),new Vector(0,0,1)));
+
+        // ============ Equivalence Partitions Tests ==============
+        assertEquals("normal to point on tube in inaccurate",expected , t1.getNormal(new Point3D(0,3,5)));
     }
 }

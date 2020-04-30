@@ -9,28 +9,36 @@ import java.util.List;
 
 public class geomitries implements Intersectable
 {
-    LinkedList<Intersectable> shapes;
+    private List<Intersectable> _geometries = new LinkedList<Intersectable>();
 
-    public geomitries(Intersectable... Geometries)
-    {
-        shapes=new LinkedList<Intersectable>();
-        /** LinkedList chosen over ArrayList because it is easier to insert and delete items **/
-        if (Geometries.length > 0)
-            add(Geometries);
+    public geomitries(Intersectable... _geometries) {
+        add( _geometries);
     }
-    public void add(Intersectable... Geometries)
-    {
-        for (Intersectable var : Geometries)
-        {
-            shapes.add(var);
+
+    public void add(Intersectable... geometries) {
+        for (Intersectable geo : geometries ) {
+            _geometries.add(geo);
         }
-
     }
 
+
+
+    public List<Intersectable> get_geometries() {
+        return _geometries;
+    }
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray)
-    {
-        return null;
+    public List<Point3D> findIntsersections(Ray ray) {
+        List<Point3D> intersections = null;
+
+        for (Intersectable geo : _geometries) {
+            List<Point3D> tempIntersections = geo.findIntsersections(ray);
+            if (tempIntersections != null) {
+                if (intersections == null)
+                    intersections = new LinkedList<Point3D>();
+                intersections.addAll(tempIntersections);
+            }
+        }
+        return intersections;
     }
 }

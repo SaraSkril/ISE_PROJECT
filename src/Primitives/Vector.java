@@ -110,4 +110,8 @@ public Vector normalized()/**returns a vector normalized in the same direction a
     public int hashCode() {
         return Objects.hash(_head);
     }
+
+    public Point3D get_head() {
+        return _head;
+    }
 }

@@ -37,4 +37,8 @@ public class Ray {
     public Vector get_direction() {
         return _direction;
     }
+
+    public Point3D getPoint() {
+        return _point;
+    }
 }

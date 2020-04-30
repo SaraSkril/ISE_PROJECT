@@ -19,46 +19,11 @@ public class Camera {
         if (_vUp.dotProduct(_vTo) != 0)
             throw new IllegalArgumentException("the vectors must be orthogonal");
 
-        this._p0 =  new Point3D(_p0);
+        this._p0 = new Point3D(_p0);
         this._vTo = _vTo.normalized();
         this._vUp = _vUp.normalized();
 
         _vRight = this._vTo.crossProduct(this._vUp).normalize();
-
-    }
-
-    public Ray constructRayThroughPixel(int nX, int nY,
-                                        int j, int i, double screenDistance,
-                                        double screenWidth, double screenHeight)
-    {
-        if (isZero(screenDistance))
-        {
-            throw new IllegalArgumentException("distance cannot be 0");
-        }
-
-        Point3D Pc = _p0.add(_vTo.scale(screenDistance));
-
-        double Ry = screenHeight/nY;
-        double Rx = screenWidth/nX;
-
-        double yi =  ((i - nY/2d)*Ry + Ry/2d);
-        double xj=   ((j - nX/2d)*Rx + Rx/2d);
-
-        Point3D Pij = Pc;
-
-        if (! isZero(xj))
-        {
-            Pij = Pij.add(_vRight.scale(xj));
-        }
-        if (! isZero(yi))
-        {
-            _vUp.scale(yi);
-            Pij = Pij.subtract(_vUp.scale(yi)); // Pij.add(_vUp.scale(-yi))
-        }
-
-        Vector Vij = Pij.subtract(_p0);
-
-        return new Ray(_p0,Vij);
 
     }
 
@@ -79,4 +44,34 @@ public class Camera {
         return new Vector(_vRight);
     }
 
+    public Ray constructRayThroughPixel(int nX, int nY,
+                                        int j, int i, double screenDistance,
+                                        double screenWidth, double screenHeight) {
+        if (isZero(screenDistance)) {
+            throw new IllegalArgumentException("distance cannot be 0");
+        }
+
+        Point3D Pc = _p0.add(_vTo.scale(screenDistance));
+
+        double Ry = screenHeight / nY;
+        double Rx = screenWidth / nX;
+
+        double yi = ((i - nY / 2d) * Ry + Ry / 2d);
+        double xj = ((j - nX / 2d) * Rx + Rx / 2d);
+
+        Point3D Pij = Pc;
+
+        if (!isZero(xj)) {
+            Pij = Pij.add(_vRight.scale(xj));
+        }
+        if (!isZero(yi)) {
+            Pij = Pij.add(_vUp.scale(-yi)); // Pij.subtract(_vUp.scale(yi))
+        }
+
+        Vector Vij = Pij.subtract(_p0);
+
+        return new Ray(_p0, Vij);
+
+    }
 }
+

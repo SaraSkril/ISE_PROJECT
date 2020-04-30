@@ -5,6 +5,8 @@ import Primitives.Ray;
 import Primitives.Util;
 import Primitives.Vector;
 
+import java.util.List;
+
 /**
  * Class Cylinder is the basic class representing cylinder
  *Cylinder extends Radial Geometry
@@ -14,31 +16,52 @@ import Primitives.Vector;
 
 public class Cylinder extends Tube
 {
-    double _height;/**cylinders height*/
+    double height;
 
-    public Cylinder(double _radius, Ray axisRay, double _height) {/**constructor*/
-        super(_radius, axisRay);/**calls constuctor of tube*/
-        this._height = _height;
-    }
-    @Override
-    public Vector getNormal(Point3D p)
+    public Cylinder(double _radius, Ray ray, double h)
     {
-        Point3D o = axisRay.getPoint(0);
-        Vector v = axisRay.get_direction();
+        super(_radius, ray);
+        height=h;
+    }
 
-        // projection of P-O on the ray:
-        double t;
-        try {
-            t = Util.alignZero(p.subtract(o).dotProduct(v));
-        } catch (IllegalArgumentException e) { // P = O
-            return v;
+    @Override
+    public String toString()
+    {
+        return "Cylinder{" +
+                "ray=" + axisRay +
+                ", _radius=" + _radius +
+                '}';
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public Vector getNormal(Point3D point)
+    {
+        Plane plane = new Plane(axisRay.getPoint(), axisRay.get_direction());
+        Vector v1 = axisRay.getPoint().subtract(point);
+        if((v1.dotProduct(axisRay.get_direction()))==0) //the vectors are orthogonal
+        {
+            return (axisRay.get_direction().scale(-1)).normalize();
         }
+        Point3D p1 = axisRay.getPoint().add(axisRay.get_direction().normalized().scale(height));
+        v1 = p1.subtract(point);
+        if((v1.dotProduct(axisRay.get_direction()))==0) //the vectors are orthogonal
+        {
+            return (axisRay.get_direction()).normalize();
+        }
+        Vector v = new Vector(point);
+        Point3D p = new Point3D(point);
+        double t = v.dotProduct(new Vector(p));
+        Point3D o = new Point3D(v.scale(t).get_head());
+        Vector n = (p.subtract(o)).normalize();
+        return n;
+    }
 
-        // if the point is at a base
-        if (t == 0 || Util.isZero(_height - t)) // if it's close to 0, we'll get ZERO vector exception
-            return v;
 
-        o = o.add(v.scale(t));
-        return p.subtract(o).normalize();
+    public List<Point3D> findIntersections(Ray ray) {
+        return super.findIntsersections(ray);
     }
 }
