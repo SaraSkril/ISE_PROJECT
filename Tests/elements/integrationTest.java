@@ -21,7 +21,7 @@ public class integrationTest
 //        Ray ray = cam1.constructRayThroughPixel(3,3,0,0,1,3,3);
 //        List<Point3D> results =  sph.findIntersections(ray);
         List<Point3D> results;
-        int count = 0;//number of intersections ray has with sphere
+        int count = 0;//number of intersections ray has with sphere g
         int Nx =3;
         int Ny =3;
         for (int i = 0; i < 3; ++i) {
