@@ -43,11 +43,11 @@ public class integrationTest
 
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+        // Pixels
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {//loop over places
                 results = sph.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -65,11 +65,11 @@ public class integrationTest
         Sphere sph= new Sphere(2,new Point3D(0,0,2));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 results = sph.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -89,11 +89,11 @@ public class integrationTest
         Sphere sph= new Sphere(4,new Point3D(0,0,1));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {//loop over places
                 results = sph.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -112,11 +112,11 @@ public class integrationTest
         Sphere sph= new Sphere(0.5,new Point3D(0,0,-1));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {//looop over places
                 results = sph.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -158,11 +158,11 @@ public class integrationTest
         Plane pl= new Plane(new Point3D(3,-3,0), new Point3D(-2,-3,0), new Point3D(0,-1,1.5));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 results = pl.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -181,11 +181,11 @@ public class integrationTest
         Plane pl= new Plane(new Point3D(0,2,3),new Vector(0,5,5));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 results = pl.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -208,11 +208,11 @@ public class integrationTest
         Triangle tr=new Triangle(new Point3D(0,-1,2),new Point3D(1,1,2),new Point3D(-1,1,2));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 results = tr.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
@@ -231,11 +231,11 @@ public class integrationTest
         Triangle tr=new Triangle(new Point3D(0,-20,2),new Point3D(1,1,2),new Point3D(-1,1,2));
         List<Point3D> results;
         int count = 0;
-        // TODO explanations
+
         int Nx =3;
         int Ny =3;
 
-        // TODO explanations
+
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 results = tr.findIntsersections(cam2.constructRayThroughPixel(Nx, Ny, j, i, 1, 3, 3));
