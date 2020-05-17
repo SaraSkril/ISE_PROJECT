@@ -1,9 +1,6 @@
 package Geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Util;
-import Primitives.Vector;
+import Primitives.*;
 
 import java.util.List;
 
@@ -21,10 +18,16 @@ public class Triangle extends Polygon
     public Triangle(Point3D... vertices) {
         super(vertices);
     }
+    public Triangle(Color emmisionL, Point3D... vertices)
+    {
+        super(emmisionL,vertices);
+       // _emmission=emmisionL;
+    }
+
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
-        List<Point3D> intersections = _plane.findIntsersections(ray);
+    public List<GeoPoint> findIntsersections(Ray ray) {
+        List<GeoPoint> intersections = _plane.findIntsersections(ray);
         if (intersections == null) return null;
 
         Point3D p0 = ray.getPoint();

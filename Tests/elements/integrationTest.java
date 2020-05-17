@@ -20,7 +20,7 @@ public class integrationTest
         Sphere sph =  new Sphere(1, new Point3D(0, 0, 3));//builds a sphere which contains a radius and pint3D
 //        Ray ray = cam1.constructRayThroughPixel(3,3,0,0,1,3,3);
 //        List<Point3D> results =  sph.findIntersections(ray);
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;//number of intersections ray has with sphere g
         int Nx =3;
         int Ny =3;
@@ -41,7 +41,7 @@ public class integrationTest
     {//sphere has 18 intersection points
         Sphere sph =  new Sphere(2.5, new Point3D(0, 0, 2.5));
 
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
         // Pixels
         int Nx =3;
@@ -63,7 +63,7 @@ public class integrationTest
     public void constructRayThroughPixelWithSphere3()
     {//sphere has 10 intersection points
         Sphere sph= new Sphere(2,new Point3D(0,0,2));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -87,7 +87,7 @@ public class integrationTest
     public void constructRayThroughPixelWithSphere4()
     {//sphere has 9 intersection pints
         Sphere sph= new Sphere(4,new Point3D(0,0,1));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -110,7 +110,7 @@ public class integrationTest
     public void constructRayThroughPixelWithSphere5()
     {//sphere has 0 intersection points
         Sphere sph= new Sphere(0.5,new Point3D(0,0,-1));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -135,7 +135,7 @@ public class integrationTest
     {
         // TC01: plane parallels to camera (9 points)
         Plane pl= new Plane(new Point3D(0,-10,0), new Point3D(0,0,3), new Point3D(-10,0,0));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
         int Nx =3;
         int Ny =3;
@@ -156,7 +156,7 @@ public class integrationTest
     {
         // TC02: small angle with view plane (9 points)
         Plane pl= new Plane(new Point3D(3,-3,0), new Point3D(-2,-3,0), new Point3D(0,-1,1.5));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -179,7 +179,7 @@ public class integrationTest
     public void constructRayThroughPixelWithPlane3()
     { //TC03: plane has 6 intersection points view plane rays.
         Plane pl= new Plane(new Point3D(0,2,3),new Vector(0,5,5));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -206,7 +206,7 @@ public class integrationTest
     public void constructRayThroughPixelWithTriangle1()
     {
         Triangle tr=new Triangle(new Point3D(0,-1,2),new Point3D(1,1,2),new Point3D(-1,1,2));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;
@@ -229,7 +229,7 @@ public class integrationTest
     public void constructRayThroughPixelWithTriangle2()
     {    //TCO2: bigger triangle parallels to plane (2 intersection points)
         Triangle tr=new Triangle(new Point3D(0,-20,2),new Point3D(1,1,2),new Point3D(-1,1,2));
-        List<Point3D> results;
+        List<Intersectable.GeoPoint> results;
         int count = 0;
 
         int Nx =3;

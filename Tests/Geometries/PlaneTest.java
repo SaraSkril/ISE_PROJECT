@@ -20,7 +20,7 @@ public class PlaneTest
         // ============ Equivalence Partitions Tests ==============
 
         // TC01:Ray must be neither orthogonal nor parallel and intersects the plane(1 points)
-        List<Point3D> intersect=plane.findIntsersections(new Ray(new Point3D(2,2,3),new Vector(1,1,-1)));
+        List<Intersectable.GeoPoint> intersect=plane.findIntsersections(new Ray(new Point3D(2,2,3),new Vector(1,1,-1)));
        // assertEquals("Error! Function does not find ray intersection",new Point3D(3,3,2), intersect.get(0));
 
         // TC02: Ray must be neither orthogonal nor parallel and doesnt intersects the plane(0 points)

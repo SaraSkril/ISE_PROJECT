@@ -1,9 +1,6 @@
 package Geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Util;
-import Primitives.Vector;
+import Primitives.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class Cylinder extends Tube
     {
         super(_radius, ray);
         height=h;
+    }
+
+    public Cylinder(Color _emmission, double _radius, Ray axisRay, double height) {
+        super(_emmission, _radius, axisRay);
+        this.height = height;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class Cylinder extends Tube
     }
 
 
-    public List<Point3D> findIntersections(Ray ray) {
+    public List<GeoPoint> findIntersections(Ray ray) {
         return super.findIntsersections(ray);
     }
 }

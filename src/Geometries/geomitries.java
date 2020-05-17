@@ -28,14 +28,14 @@ public class geomitries implements Intersectable
     }
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
-        List<Point3D> intersections = null;
+    public List<GeoPoint> findIntsersections(Ray ray) {
+        List<GeoPoint> intersections = null;
 
         for (Intersectable geo : _geometries) {
-            List<Point3D> tempIntersections = geo.findIntsersections(ray);
+            List<GeoPoint> tempIntersections = geo.findIntsersections(ray);
             if (tempIntersections != null) {
                 if (intersections == null)
-                    intersections = new LinkedList<Point3D>();
+                    intersections = new LinkedList<GeoPoint>();
                 intersections.addAll(tempIntersections);
             }
         }

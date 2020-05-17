@@ -12,7 +12,7 @@ import scene.Scene;
 import java.util.List;
 
 import static Primitives.Util.alignZero;
-
+import Geometries.Intersectable.GeoPoint;
 public class Render {
 
     private ImageWriter _imageWriter;
@@ -53,12 +53,12 @@ public class Render {
         for (int row = 0; row < Ny; ++row) {
             for (int column = 0; column < Nx; ++column) {
                 Ray ray = camera.constructRayThroughPixel(Nx, Ny, column, row, distance, width, height);
-                List<Point3D> intersectionPoints = geometries.findIntsersections(ray);
+                List<GeoPoint> intersectionPoints = geometries.findIntsersections(ray);
                 if (intersectionPoints == null) {
                     _imageWriter.writePixel(column, row, background);
                 }
                 else {
-                    Point3D closestPoint = getClosestPoint(intersectionPoints);
+                    GeoPoint closestPoint = getClosestPoint(intersectionPoints);
                     java.awt.Color pixelColor = calcColor(closestPoint).getColor();
                     _imageWriter.writePixel(column, row, pixelColor);
                 }
@@ -92,14 +92,14 @@ public class Render {
      * @return the closest point to the camera
      */
 
-    private Point3D getClosestPoint(List<Point3D> intersectionPoints) {
-        Point3D result = null;
+    private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
+        GeoPoint result = null;
         double startValue = Double.MAX_VALUE;
 
         Point3D p0 = this._scene.get_camera().get_p0();
 
-        for (Point3D point3D : intersectionPoints) {
-            double distance = p0.distance(point3D);
+        for (GeoPoint point3D : intersectionPoints) {
+            double distance = p0.distance(point3D.point);
             if (distance < startValue) {
                 startValue = distance;
                 result = point3D;
@@ -112,8 +112,11 @@ public class Render {
         _imageWriter.writeToImage();
     }
 
-    private Color calcColor(Point3D point) {
-        return _scene.get_ambientLight().get_intensity();
+    private Color calcColor(GeoPoint point)
+    {
+        Color color = this._scene.get_ambientLight().get_intensity();
+        color = color.add(point.geometry.get_emmission());
+        return color;
     }
 }
 

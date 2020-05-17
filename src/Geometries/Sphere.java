@@ -1,9 +1,6 @@
 package Geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Vector;
-import Primitives.Util;
+import Primitives.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class Sphere extends RadialGeometry
         this._center = _center;
     }
 
+    public Sphere(Color _emmission, double _radius, Point3D _center) {
+        super(_emmission, _radius);
+        this._center = _center;
+    }
+
     @Override
     public Vector getNormal(Point3D p)
     {
@@ -33,14 +35,14 @@ public class Sphere extends RadialGeometry
     }
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
         Point3D p0 = ray.getPoint();
         Vector v = ray.get_direction();
         Vector u;
         try {
             u = _center.subtract(p0);   // p0 == _center
         } catch (IllegalArgumentException e) {
-            return List.of(ray.getTargetPoint(_radius));
+            return List.of(new GeoPoint(this,ray.getTargetPoint(_radius)));
         }
         double tm = alignZero(v.dotProduct(u));
         double dSquared = (tm == 0) ? u.lengthSquared() : u.lengthSquared() - tm * tm;
@@ -54,11 +56,11 @@ public class Sphere extends RadialGeometry
         double t1 = alignZero(tm - th);
         double t2 = alignZero(tm + th);
         if (t1 <= 0 && t2 <= 0) return null;
-        if (t1 > 0 && t2 > 0) return List.of(ray.getTargetPoint(t1), ray.getTargetPoint(t2)); //P1 , P2
+        if (t1 > 0 && t2 > 0) return List.of(new GeoPoint(this,ray.getTargetPoint(t1)),new GeoPoint(this, ray.getTargetPoint(t2))); //P1 , P2
         if (t1 > 0)
-            return List.of(ray.getTargetPoint(t1));
+            return List.of(new GeoPoint(this,ray.getTargetPoint(t1)));
         else
-            return List.of(ray.getTargetPoint(t2));
+            return List.of(new GeoPoint(this,ray.getTargetPoint(t2)));
     }
 
 

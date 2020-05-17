@@ -1,8 +1,5 @@
 package Geometries;
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Util;
-import Primitives.Vector;
+import Primitives.*;
 
 import java.util.List;
 
@@ -26,6 +23,11 @@ public class Tube extends RadialGeometry
         this.axisRay = axisRay;
     }
 
+    public Tube(Color _emmission, double _radius, Ray axisRay) {
+        super(_emmission, _radius);
+        this.axisRay = axisRay;
+    }
+
     @Override
     public Vector getNormal(Point3D p)
     {
@@ -38,7 +40,7 @@ public class Tube extends RadialGeometry
 
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
 
         return null;
     }

@@ -10,7 +10,7 @@ import static Primitives.Util.*;
  *
  * @author Dan
  */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
     /**
      * List of polygon's vertices
      */
@@ -79,6 +79,11 @@ public class Polygon implements Geometry {
                 throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
         }
     }
+    public Polygon(Color emissionLight, Point3D... vertices) {
+        this(vertices);
+        this._emmission=emissionLight;
+
+    }
 
     @Override
     public Vector getNormal(Point3D point) {
@@ -86,7 +91,7 @@ public class Polygon implements Geometry {
     }
 
     @Override
-    public List<Point3D> findIntsersections(Ray ray) {
+    public List<GeoPoint> findIntsersections(Ray ray) {
         return null;
     }
 }
