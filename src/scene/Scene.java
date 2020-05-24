@@ -3,6 +3,9 @@ import Primitives.*;
 import elements.*;
 import Geometries.*;
 
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class Scene {
     String _name;
@@ -11,10 +14,16 @@ public class Scene {
     geomitries _geometries;
     Camera _camera;
     double _distance;
+    List<LightSource> _lights=null;
 
+    /**
+     * *constructor for scene -recieves the name of the scene
+     * @param _name
+     */
     public Scene(String _name) {
         this._name = _name;
         _geometries=new geomitries();
+        _lights=new LinkedList<LightSource>();
     }
 
     public String get_name() {
@@ -61,5 +70,19 @@ public class Scene {
         for (Intersectable i : Geometries)
             _geometries.add(i);
     }
+    public void addLights(LightSource... lights) {
+        for (LightSource light:lights) {
+            _lights.add(light);
+        }
 
+}
+
+    /**
+     * *get list of light sources in scene
+     * @return list of light in scene
+     */
+
+    public List<LightSource> get_lights() {
+        return _lights;
+    }
 }
