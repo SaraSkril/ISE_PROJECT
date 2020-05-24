@@ -13,11 +13,19 @@ public abstract class Geometry implements Intersectable{
    protected Color _emmission;
    protected Material _material;
 
-   public Geometry(Material _material,Color _emmission) {
-      this._material = _material;
-      this._emmission=_emmission
-   }
 
+   /**
+    * constructor that recieves both parameters of Geometry
+    * @param emmission
+    * @param _material
+    */
+   public Geometry(Color emmission, Material _material) {
+      _emmission = new Color(emmission);
+      this._material = _material;
+   }
+   /**
+    * @return material geometry is made of
+    */
    public Material get_material() {
       return _material;
    }
@@ -29,10 +37,18 @@ public abstract class Geometry implements Intersectable{
       return _emmission;
    }
 
-   public Geometry(Color _emmission) {
-      this._emmission = new Color(_emmission);
+   /**
+    * constructor that recieves only emission light
+    * @param emmission
+    */
+   public Geometry(Color emmission) {
+      this(emmission, new Material(0,0,0));
    }
-   public Geometry() {
-      this._emmission = Color.BLACK;
+
+   /**
+    * default constructor creates a balck geometry with no emission light
+    */
+   public Geometry(){
+      this(Color.BLACK, new Material(0,0,0));
    }
 }

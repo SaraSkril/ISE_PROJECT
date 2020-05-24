@@ -23,6 +23,9 @@ public class Triangle extends Polygon
         super(emmisionL,vertices);
        // _emmission=emmisionL;
     }
+    public Triangle(Color emissionLight, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        super(emissionLight,material,p1,p2,p3);
+    }
 
 
     @Override

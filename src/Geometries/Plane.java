@@ -1,9 +1,6 @@
 package Geometries;
 
-import Primitives.Point3D;
-import Primitives.Ray;
-import Primitives.Util;
-import Primitives.Vector;
+import Primitives.*;
 
 import java.util.List;
 
@@ -25,6 +22,19 @@ public class Plane extends Geometry
         N.normalize();
 
         _normal = N.scale(-1);
+    }
+    public Plane(Color emissionLight, Material material, Point3D p1, Point3D p2, Point3D p3) {
+        super(emissionLight, material);
+
+        _p = new Point3D(p1);
+
+        Vector U = new Vector(p1, p2);
+        Vector V = new Vector(p1, p3);
+
+        Vector N = U.crossProduct(V);
+        N.normalize();
+
+        _normal = N;
     }
 
 

@@ -1,6 +1,9 @@
 package Geometries;
 
 import Primitives.Color;
+import Primitives.Material;
+
+import static Primitives.Util.isZero;
 
 /**
  * Class Radial Geometry is the abstract class representing Radial Geometry
@@ -26,6 +29,16 @@ public abstract class RadialGeometry extends Geometry
     public RadialGeometry(RadialGeometry r)
     {
         _radius=r._radius;
+    }
+    public RadialGeometry(Color emissionLight, double radius, Material material) {
+        super(emissionLight, material);
+        setRadius(radius);
+    }
+
+    public void setRadius(double radius) {
+        if (isZero(radius) || (radius < 0.0))
+            throw new IllegalArgumentException("radius " + radius + " is not valid");
+        this._radius = radius;
     }
 
     /*

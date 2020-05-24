@@ -25,6 +25,18 @@ public class Cylinder extends Tube
         super(_emmission, _radius, axisRay);
         this.height = height;
     }
+    /**
+     * Cylinder constructor
+     * @param _radius radius value
+     * @param _axisRay axis ray value
+     * @param _height height value
+     * @param _emmission emission light of cylinder
+     * @param _material material of cylinder
+     */
+    public Cylinder(double _radius, Ray _axisRay, double _height, Color _emmission, Material _material){
+        this(_emmission,_radius, _axisRay, _height);
+        this._material = _material;
+    }
 
     @Override
     public String toString()

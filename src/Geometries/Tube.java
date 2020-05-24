@@ -27,7 +27,21 @@ public class Tube extends RadialGeometry
         super(_emmission, _radius);
         this.axisRay = axisRay;
     }
+    /**
+     * constructor for a new Cylinder object
+     *
+     * @param _radius       the radius of the tube
+     * @param _ray          the direction of the tube from the referenced point
+     * @param _material     the material of the tube
+     * @param emissionLight the emission light of the tube
+     * @throws Exception in case of negative or zero radius from RadialGeometry constructor
+     */
+    public Tube(Color emissionLight, Material _material, double _radius, Ray _ray) {
+        super(Color.BLACK, _radius);
+        this._material = _material;
+        this.axisRay = new Ray(_ray);
 
+    }
     @Override
     public Vector getNormal(Point3D p)
     {

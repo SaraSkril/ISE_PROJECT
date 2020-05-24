@@ -34,6 +34,12 @@ public class Vector
     {
         _head=v._head;
     }
+
+
+    public Vector(Point3D p1, Point3D p2) {
+        this(p1.subtract(p2));
+    }
+
     public Vector subtract(Vector v)/**subtracts between this and v and returns the subtracted vector*/
     {
         return new Vector(this._head._x._coord-v._head._x._coord,this._head._y._coord-v._head._y._coord,this._head._z._coord-v._head._z._coord);

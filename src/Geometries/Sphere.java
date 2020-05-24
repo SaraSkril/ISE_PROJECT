@@ -27,7 +27,10 @@ public class Sphere extends RadialGeometry
         super(_emmission, _radius);
         this._center = _center;
     }
-
+    public Sphere(Color emissionLight, Material material, double radius, Point3D center) {
+        super(emissionLight, radius, material);
+        this._center = new Point3D(center);
+    }
     @Override
     public Vector getNormal(Point3D p)
     {
