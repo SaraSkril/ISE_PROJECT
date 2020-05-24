@@ -21,7 +21,7 @@ public class RenderTests2 {
      * grid
      */
     @Test
-    public void basicRenderTwoColorTest() {
+    public void basicRenderTwoColorTest() {//2123
         Scene scene = new Scene("Test scene");
         scene.set_camera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)));
         scene.set_distance(100);
