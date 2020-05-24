@@ -58,8 +58,8 @@ public class Scene {
     }
     public void addGeometries(Intersectable... Geometries)
     {
-
-        _geometries.add(Geometries);
+        for (Intersectable i : Geometries)
+            _geometries.add(i);
     }
 
 }
