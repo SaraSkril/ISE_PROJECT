@@ -44,7 +44,7 @@ public class RenderTests2 {
         render.writeToImage();
     }
 
-    @Test
+    @Test//i think the issue is here
     public void basicRenderMultiColorTest() {
         Scene scene = new Scene("Test scene");
         scene.set_camera(new Camera(Point3D.ZERO, new Vector(0, 0, 1), new Vector(0, -1, 0)));

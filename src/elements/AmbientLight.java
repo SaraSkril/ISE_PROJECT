@@ -3,6 +3,7 @@ import Primitives.Color;
 
 public class AmbientLight
 
+
 {
     Color _intensity;
 
