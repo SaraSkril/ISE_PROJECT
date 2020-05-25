@@ -47,7 +47,15 @@ public class Triangle extends Polygon
         double s3 = v.dotProduct(v3.crossProduct(v1));
         if (isZero(s3)) return null;
 
-        return ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) ? intersections : null;
+
+        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
+            for (GeoPoint geo : intersections) {
+                geo.geometry = this;
+            }
+            return intersections;
+        }
+
+        return null;
 
     }
 }
