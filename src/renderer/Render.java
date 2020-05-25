@@ -114,9 +114,58 @@ public class Render {
 
     private Color calcColor(GeoPoint point)
     {
-        Color color = this._scene.get_ambientLight().get_intensity();
+       /* Color color = this._scene.get_ambientLight().get_intensity();
         color = color.add(point.geometry.get_emmission());
-        return color;
+        return color;*/
+        Color result = _scene.get_ambientLight().getIntensity();
+        result = result.add(point.getGeometry().get_emmission());
+        List<LightSource> lights = _scene.get_lights();
+
+        Vector v = point.getPoint().subtract(_scene.get_camera().get_p0()).normalize();
+        Vector n = point.getGeometry().getNormal(point.getPoint());
+
+        Material material = point.getGeometry().get_material();
+        int nShininess = material.getnShininess();
+        double kd = material.getKd();
+        double ks = material.getKs();
+        if (_scene.get_lights() != null) {
+            for (LightSource lightSource : lights) {
+
+                Vector l = lightSource.getL(point.getPoint());
+                double nl = alignZero(n.dotProduct(l));
+                double nv = alignZero(n.dotProduct(v));
+
+                if (sign(nl) == sign(nv)) {
+                    Color ip = lightSource.getIntensity(point.getPoint());
+                    result = result.add(
+                            calcDiffusive(kd, nl, ip),
+                            calcSpecular(ks, l, n, nl, v, nShininess, ip)
+                    );
+                }
+            }
+
+        }
+        return result;
+
+    }
+    private Color calcDiffusive(double kd, double nl, Color ip) {
+        if (nl < 0) nl = -nl;
+        return ip.scale(nl * kd);
+    }
+
+    private Color calcSpecular(double ks, Vector l, Vector n, double nl, Vector v, int nShininess, Color ip) {
+        double p = nShininess;
+
+        Vector R = l.add(n.scale(-2 * nl)); // nl must not be zero!
+        double minusVR = -alignZero(R.dotProduct(v));
+        if (minusVR <= 0) {
+            return Color.BLACK; // view from direction opposite to r vector
+        }
+        return ip.scale(ks * Math.pow(minusVR, p));
+    }
+    private boolean sign(double val)
+    {
+        return (val > 0d);
     }
 }
 

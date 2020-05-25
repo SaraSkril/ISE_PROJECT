@@ -24,6 +24,14 @@ public interface Intersectable
             this.point = point;
         }
 
+        public Geometry getGeometry() {
+            return geometry;
+        }
+
+        public Point3D getPoint() {
+            return point;
+        }
+
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;

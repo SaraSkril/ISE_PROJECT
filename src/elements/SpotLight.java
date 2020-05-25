@@ -7,9 +7,10 @@ import Primitives.Vector;
 public class SpotLight extends PointLight
 {private Vector _direction;
 
-    public SpotLight(Color colorIntensity, Point3D position, double kC, double kL, double kQ) {
+    public SpotLight(Color colorIntensity, Point3D position,Vector vector, double kC, double kL, double kQ) {
         super(colorIntensity, position, kC, kL, kQ);
-        this._direction=new Vector(_direction).normalized();
+        //this._direction=new Vector(_direction).normalized();
+        this._direction=vector.normalized();
     }
 @Override
 public Vector getL(Point3D p)

@@ -21,7 +21,7 @@ public abstract class Geometry implements Intersectable{
     */
    public Geometry(Color emmission, Material _material) {
       _emmission = new Color(emmission);
-      this._material = _material;
+      this._material = new Material(_material);
    }
    /**
     * @return material geometry is made of
