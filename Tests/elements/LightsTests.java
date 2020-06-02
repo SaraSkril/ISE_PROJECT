@@ -177,5 +177,6 @@ public class LightsTests {
         render.renderImage();
         render.writeToImage();
     }
+    
 
 }
