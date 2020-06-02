@@ -1,7 +1,7 @@
 package Geometries;
 
 import Primitives.Color;
-import Primitives.Material;
+import elements.Material;
 
 import static Primitives.Util.isZero;
 

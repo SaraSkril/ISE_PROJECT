@@ -2,6 +2,8 @@ package Geometries;
 
 import java.util.List;
 import Primitives.*;
+import elements.Material;
+
 import static Primitives.Util.*;
 
 /**

@@ -2,23 +2,42 @@ package elements;
 import static java.lang.Math.max;
 import Primitives.Color;
 import Primitives.Point3D;
+import Primitives.Util;
 import Primitives.Vector;
 
 public class SpotLight extends PointLight
-{private Vector _direction;
+{
+     Vector _direction;
+    double _concentration;
 
-    public SpotLight(Color colorIntensity, Point3D position,Vector vector, double kC, double kL, double kQ) {
+public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ, double concentration) {
         super(colorIntensity, position, kC, kL, kQ);
-        //this._direction=new Vector(_direction).normalized();
-        this._direction=vector.normalized();
-    }
-@Override
-public Vector getL(Point3D p)
-{return _direction.normalize();}
+        this._direction = new Vector(direction).normalized();
+        this._concentration = concentration;
+        }
 
+public SpotLight(Color colorIntensity, Point3D position, Vector direction, double kC, double kL, double kQ) {
+        this(colorIntensity, position, direction, kC, kL, kQ, 1);
+        }
+
+
+/**
+ * @return spotlight intensity
+ */
+@Override
 public Color getIntensity(Point3D p) {
-    double _distance = p.distance(_position);
-    double m = max(0, _direction.dotProduct(super.getL(p)));
-    return _intensity.scale(m / (_kC + _kL * _distance + _kQ * _distance * _distance));
-}
+        double projection = _direction.dotProduct(getL(p));
+
+        if (Util.isZero(projection)) {
+        return Color.BLACK;
+        }
+        double factor = Math.max(0, projection);
+        Color pointlightIntensity = super.getIntensity(p);
+
+        if (_concentration != 1) {
+        factor = Math.pow(factor, _concentration);
+        }
+
+        return (pointlightIntensity.scale(factor));
+        }
 }

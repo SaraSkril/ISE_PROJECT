@@ -85,4 +85,51 @@ public class Scene {
     public List<LightSource> get_lights() {
         return _lights;
     }
+    public static class SceneBuilder {
+        private String name;
+        private Color background;
+        private Camera camera;
+        private double distance;
+        private AmbientLight ambientLight;
+
+        public SceneBuilder(String name) {
+            this.name = name;
+        }
+
+        public SceneBuilder addBackground(Color background) {
+            this.background = background;
+            return this;
+        }
+
+        public SceneBuilder addCamera(Camera camera) {
+            this.camera = camera;
+            return this;
+        }
+
+        public SceneBuilder addDistance(double distance) {
+            this.distance = distance;
+            return this;
+        }
+
+        public SceneBuilder addAmbientLight(AmbientLight ambientLight) {
+            this.ambientLight = ambientLight;
+            return this;
+        }
+
+        public Scene build() {
+            Scene scene = new Scene(this.name);
+            scene._camera = this.camera;
+            scene._distance = this.distance;
+            scene._background = this.background;
+            scene._ambientLight = this.ambientLight;
+            validateUserObject(scene);
+            return scene;
+        }
+
+        private void validateUserObject(Scene scene) {
+            //Do some basic validations to check
+            //if user object does not break any assumption of system
+        }
+    }
 }
+
