@@ -21,11 +21,33 @@ public class Render {
     private final ImageWriter _imageWriter;
     private final Scene _scene;
 
+    private double _supersamplingDensity = 0d;
+    private int _rayCounter = 1;
+
     private static final double DELTA = 0.1;
 
     public Render(ImageWriter imageWriter, Scene scene) {
         this._imageWriter = imageWriter;
         this._scene = scene;
+        this._supersamplingDensity = 0d;
+    }
+
+    public double getSupersamplingDensity() {
+        return _supersamplingDensity;
+    }
+
+    public Render setSupersamplingDensity(double supersamplingDensity) {
+        _supersamplingDensity = supersamplingDensity;
+        return this;
+    }
+
+    public int getRayCounter() {
+        return _rayCounter;
+    }
+
+    public Render setRayCounter(int rayCounter) {
+        _rayCounter = rayCounter;
+        return this;
     }
 
     public void printGrid(int interval, java.awt.Color color) {
@@ -44,7 +66,7 @@ public class Render {
         _imageWriter.writeToImage();
     }
 
-    public void renderImage() {
+    /*public void renderImage() {
         Camera camera = _scene.get_camera();
         Intersectable geometries = _scene.get_geometries();
         java.awt.Color background = _scene.get_background().getColor();
@@ -64,6 +86,44 @@ public class Render {
                     _imageWriter.writePixel(collumn, row, background);
                 } else {
                     _imageWriter.writePixel(collumn, row, calcColor(closestPoint, ray).getColor());
+                }
+            }
+        }
+    }*/
+    public void renderImage() {
+        Camera camera = _scene.get_camera();
+        Intersectable geometries = _scene.get_geometries();
+        java.awt.Color background = _scene.get_background().getColor();
+        AmbientLight ambientLight = _scene.get_ambientLight();
+        double distance = _scene.get_distance();
+
+        int Nx = _imageWriter.getNx();
+        int Ny = _imageWriter.getNy();
+        double width = _imageWriter.getWidth();
+        double height = _imageWriter.getHeight();
+
+        if (_supersamplingDensity == 0d) {
+            for (int row = 0; row < Ny; row++) {
+                for (int collumn = 0; collumn < Nx; collumn++) {
+                    Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
+                    GeoPoint closestPoint = findClosestIntersection(ray);
+                    if (closestPoint == null) {
+                        _imageWriter.writePixel(collumn, row, background);
+                    } else {
+                        _imageWriter.writePixel(collumn, row, calcColor(closestPoint, ray).getColor());
+                    }
+                }
+            }
+        } else {    //supersampling
+            for (int row = 0; row < Ny; row++) {
+                for (int collumn = 0; collumn < Nx; collumn++) {
+                    Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
+                    GeoPoint centerPoint = findClosestIntersection(ray);
+                    Color Bckg = new Color(background);
+                    Color averageColor = Color.BLACK;
+                    List<Ray> rayBeam = camera.constructRayBeamThroughPixel(Nx, Ny, collumn, row, distance, width, height, _supersamplingDensity, _rayCounter);
+                    rayBeam.add(ray);
+                    _imageWriter.writePixel(collumn, row, calcColor(rayBeam).getColor());
                 }
             }
         }
@@ -121,6 +181,17 @@ public class Render {
             }
         }
         return closestPoint;
+    }
+    private Color calcColor(List<Ray> inRay) {
+        Color bkg = _scene.get_background();
+        Color color = Color.BLACK;
+        for (Ray ray : inRay) {
+            GeoPoint gp = findClosestIntersection(ray);
+            color = color.add(gp == null ? bkg : calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, 1d));
+        }
+        color = color.add(_scene.get_ambientLight().getIntensity());
+        int size = inRay.size();
+        return (size == 1) ? color : color.reduce(size);
     }
 
     private Color calcColor(GeoPoint geoPoint, Ray inRay) {
@@ -311,4 +382,6 @@ public class Render {
         }
         return true;
     }
+
+
 }
