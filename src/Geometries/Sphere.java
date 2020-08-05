@@ -10,34 +10,64 @@ import static Primitives.Util.alignZero;
 /**
  * Class Sphere is the basic class representing Sphere
  *Cylinder extends Radial Geometry
- * @author ELisheva Aronstam  and Sara Raizel Skriloff
+ * @author the quad
  */
 public class Sphere extends RadialGeometry
 {
+    /**
+     * point3D is the center point of the sphere
+     */
     Point3D _center; //center of sphere
 
-    /*
-    Constructor
+    /**
+     *
+     * @param _radius
+     * @param _center
      */
     public Sphere(double _radius, Point3D _center) {
         super(_radius);
         this._center = _center;
     }
 
+    /**
+     *
+     * @param _emmission
+     * @param _radius
+     * @param _center
+     */
     public Sphere(Color _emmission, double _radius, Point3D _center) {
         super(_emmission, _radius);
         this._center = _center;
     }
+
+    /**
+     *
+     * @param emissionLight
+     * @param material
+     * @param radius
+     * @param center
+     */
     public Sphere(Color emissionLight, Material material, double radius, Point3D center) {
         super(emissionLight, radius, material);
         this._center = new Point3D(center);
     }
+
+    /**
+     *
+     * @param p
+     * @return the normal vector of the sphere
+     */
     @Override
     public Vector getNormal(Point3D p)
     {
         return p.subtract(_center).normalize();
     }
 
+    /**
+     *
+     * @param ray
+     * @return the intersection between the ray and the sphere
+     */
     @Override
     public List<GeoPoint> findIntsersections(Ray ray) {
         Point3D p0 = ray.getPoint();

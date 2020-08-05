@@ -9,11 +9,13 @@ import static Primitives.Util.isZero;
 /**
  * Class Tube is the basic class representing tube
  *Cylinder extends Radial Geometry
- * @author ELisheva Aronstam  and Sara Raizel Skriloff
+ * @author the quad
  */
 public class Tube extends RadialGeometry
 {
-    //the Ray Axis
+    /**
+     * the ray axis of the tube
+     */
     Ray axisRay;
 
     /*
@@ -24,6 +26,12 @@ public class Tube extends RadialGeometry
         this.axisRay = axisRay;
     }
 
+    /**
+     * constructor
+     * @param _emmission
+     * @param _radius
+     * @param axisRay
+     */
     public Tube(Color _emmission, double _radius, Ray axisRay) {
         super(_emmission, _radius);
         this.axisRay = axisRay;
@@ -43,6 +51,12 @@ public class Tube extends RadialGeometry
         this.axisRay = new Ray(_ray);
 
     }
+
+    /**
+     *
+     * @param p
+     * @return the normal vector of the tube
+     */
     @Override
     public Vector getNormal(Point3D p)
     {
@@ -53,7 +67,11 @@ public class Tube extends RadialGeometry
         return p.subtract(O).normalize();
     }
 
-
+    /**
+     *
+     * @param ray
+     * @return intersections
+     */
     @Override
     public List<GeoPoint> findIntsersections(Ray ray) {
 

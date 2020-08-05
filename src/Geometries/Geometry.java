@@ -6,11 +6,17 @@ import Primitives.Point3D;
 import Primitives.Vector;
 
 
-/*Class Geometry is the abstract class representing a Geometry and implements intercectible
-         * @author ELisheva Aronstam  and Sara Raizel Skriloff
-        */
+/*Class Geometry is the abstract class representing a Geometry and implements intersectable
+* @author ELisheva Aronstam  and Sara Raizel Skriloff and sara teigman and esther aviva burack
+*/
 public abstract class Geometry implements Intersectable{
+   /**
+    * the color emmission of the geometry
+    */
    protected Color _emmission;
+   /**
+    * the material of the geometry
+    */
    protected Material _material;
 
 
