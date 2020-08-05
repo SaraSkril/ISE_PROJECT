@@ -31,11 +31,31 @@ import Primitives.Vector;
  * resulting in no attenuation.
  */
 public class PointLight extends Light implements LightSource {
+    /**
+     * the position of the light
+     */
     Point3D _position;
+    /**
+     * attenuation factor kC
+     */
     double _kC; // Constant attenuation
+    /**
+     * attenuation factor kL
+     */
     double _kL; // Linear attenuation
+    /**
+     * attenuation factor kQ
+     */
     double _kQ; // Quadratic attenuation
 
+    /**
+     * point light constructor
+     * @param colorIntensity
+     * @param position
+     * @param kC
+     * @param kL
+     * @param kQ
+     */
     public PointLight(Color colorIntensity, Point3D position, double kC, double kL, double kQ) {
         this._intensity = colorIntensity;
         this._position = new Point3D(position);
@@ -45,17 +65,34 @@ public class PointLight extends Light implements LightSource {
     }
 
     // by default, the constant attenuation value is 1 and the other two values are 0
+
+    /**
+     * point light constructor
+     * @param colorIntensity
+     * @param position
+     */
     public PointLight(Color colorIntensity, Point3D position) {
         this(colorIntensity, position, 1d, 0d, 0d);
     }
 
     //dummy overriding Light getIntensity()
+
+    /**
+     *
+     * @return the intensity of the light in the point
+     */
     @Override
     public Color getIntensity() {
         return super.getIntensity();
     }
 
     //overriding LightSource getIntensity(Point3D)
+
+    /**
+     *
+     * @param p the lighted point
+     * @return the intensity of the light in the point
+     */
     @Override
     public Color getIntensity(Point3D p) {
         double dsquared = p.distanceSquared(_position);
@@ -65,6 +102,12 @@ public class PointLight extends Light implements LightSource {
     }
 
     // Light vector
+
+    /**
+     *
+     * @param p the lighted point
+     * @return the vector from the source light to the point
+     */
     @Override
     public Vector getL(Point3D p) {
         if (p.equals(_position)) {
@@ -72,6 +115,12 @@ public class PointLight extends Light implements LightSource {
         }
         return p.subtract(_position).normalize();
     }
+
+    /**
+     *
+     * @param point
+     * @return distance
+     */
     @Override
     public double getDistance(Point3D point) {
         return _position.distance(point);

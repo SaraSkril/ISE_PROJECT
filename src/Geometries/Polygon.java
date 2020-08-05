@@ -87,6 +87,13 @@ public class Polygon extends Geometry {
        // this._emmission=emissionLight;
 
     }
+
+    /**
+     *
+     * @param emissionLight
+     * @param material
+     * @param vertices
+     */
     public Polygon(Color emissionLight, Material material, Point3D... vertices) {
 
         super(emissionLight, material);
@@ -129,11 +136,21 @@ public class Polygon extends Geometry {
         }
     }
 
+    /**
+     *
+     * @param point
+     * @return
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return _plane.getNormal();
     }
 
+    /**
+     *
+     * @param ray
+     * @return
+     */
     @Override
     public List<GeoPoint> findIntsersections(Ray ray) {
         return null;

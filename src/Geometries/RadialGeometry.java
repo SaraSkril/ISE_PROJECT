@@ -8,7 +8,7 @@ import static Primitives.Util.isZero;
 /**
  * Class Radial Geometry is the abstract class representing Radial Geometry
  *Cylinder extends implements Geometry
- * @author ELisheva Aronstam  and Sara Raizel Skriloff
+ * @author the quad
  */
 public abstract class RadialGeometry extends Geometry
 {
@@ -30,19 +30,31 @@ public abstract class RadialGeometry extends Geometry
     {
         _radius=r._radius;
     }
+
+    /**
+     *
+     * @param emissionLight
+     * @param radius
+     * @param material
+     */
     public RadialGeometry(Color emissionLight, double radius, Material material) {
         super(emissionLight, material);
         setRadius(radius);
     }
 
+    /**
+     *
+     * @param radius
+     */
     public void setRadius(double radius) {
         if (isZero(radius) || (radius < 0.0))
             throw new IllegalArgumentException("radius " + radius + " is not valid");
         this._radius = radius;
     }
 
-    /*
-    returns radius
+    /**
+     *
+     * @return radius
      */
     public double get_radius() {
         return _radius;

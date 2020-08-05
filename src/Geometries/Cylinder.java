@@ -8,20 +8,36 @@ import java.util.List;
 /**
  * Class Cylinder is the basic class representing cylinder
  *Cylinder extends Radial Geometry
- * @author ELisheva Aronstam  and Sara Raizel Skriloff
+ * @author the quad
  */
 
 
 public class Cylinder extends Tube
 {
+    /**
+     * the height of the cylinder
+     */
     double height;
 
+    /**
+     * cylinder constructor
+     * @param _radius
+     * @param ray
+     * @param h
+     */
     public Cylinder(double _radius, Ray ray, double h)
     {
         super(_radius, ray);
         height=h;
     }
 
+    /**
+     * cylinder constructor
+     * @param _emmission
+     * @param _radius
+     * @param axisRay
+     * @param height
+     */
     public Cylinder(Color _emmission, double _radius, Ray axisRay, double height) {
         super(_emmission, _radius, axisRay);
         this.height = height;
@@ -39,6 +55,10 @@ public class Cylinder extends Tube
         this._material = _material;
     }
 
+    /**
+     *
+     * @return to string of cylinder class
+     */
     @Override
     public String toString()
     {
@@ -48,10 +68,19 @@ public class Cylinder extends Tube
                 '}';
     }
 
+    /**
+     *
+     * @return height of cylinder
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     *
+     * @param point
+     * @return the normal vector of the cylinder
+     */
     @Override
     public Vector getNormal(Point3D point)
     {
@@ -75,7 +104,11 @@ public class Cylinder extends Tube
         return n;
     }
 
-
+    /**
+     *
+     * @param ray
+     * @return the intersection between the ray and the cylinder
+     */
     public List<GeoPoint> findIntersections(Ray ray) {
         return super.findIntsersections(ray);
     }

@@ -4,16 +4,37 @@ import Primitives.*;
 import elements.Material;
 
 import java.util.List;
-
+/**
+ * plane class represents plane
+ *
+ */
 public class Plane extends Geometry
 {
+    /**
+     * point3D on the plane
+     */
     Point3D _p;
+    /**
+     * normal vector of the plane
+     */
     Vector _normal;
 
+    /**
+     * plane constructor
+     * @param _p
+     * @param _normal
+     */
     public Plane(Point3D _p, Vector _normal) {/**constructor */
         this._p = _p;
         this._normal = new Vector(_normal);
     }
+
+    /**
+     * plane constructor
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public  Plane(Point3D p1,Point3D p2,Point3D p3)/**constructor*/
     {
         _p=p1;
@@ -24,6 +45,15 @@ public class Plane extends Geometry
 
         _normal = N.scale(-1);
     }
+
+    /**
+     * plane constructor
+     * @param emissionLight
+     * @param material
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public Plane(Color emissionLight, Material material, Point3D p1, Point3D p2, Point3D p3) {
         super(emissionLight, material);
 
@@ -38,7 +68,11 @@ public class Plane extends Geometry
         _normal = N;
     }
 
-
+    /**
+     *
+     * @param p
+     * @return the a normal vector to the plane - vector
+     */
     @Override
     public Vector getNormal(Point3D p) {/**returns the normal*/
 
@@ -46,11 +80,20 @@ public class Plane extends Geometry
 
     }
 
+    /**
+     *
+     * @return the a normal vector to the plane - vector
+     */
     public Vector getNormal()
     {
         return _normal;
     }
 
+    /**
+     *
+     * @param ray
+     * @return the intersection between the ray and the plane
+     */
     @Override
     public List<GeoPoint> findIntsersections(Ray ray) {
         Vector p0Q;

@@ -10,25 +10,48 @@ import static Primitives.Util.isZero;
 /**
  * Class Triangle is the basic class representing triangle
  *Cylinder extends Radial Geometry
- * @author ELisheva Aronstam  and Sara Raizel Skriloff
+ * @author the quad
  */
 
 public class Triangle extends Polygon
 {
-    //constructor using polygons constructor
+
+    /**
+     * constructor
+      * @param vertices
+     */
     public Triangle(Point3D... vertices) {
         super(vertices);
     }
+
+    /**
+     * constructor
+     * @param emmisionL
+     * @param vertices
+     */
     public Triangle(Color emmisionL, Point3D... vertices)
     {
         super(emmisionL,vertices);
        // _emmission=emmisionL;
     }
+
+    /**
+     * constructor
+     * @param emissionLight
+     * @param material
+     * @param p1
+     * @param p2
+     * @param p3
+     */
     public Triangle(Color emissionLight, Material material, Point3D p1, Point3D p2, Point3D p3) {
         super(emissionLight,material,p1,p2,p3);
     }
 
-
+    /**
+     *
+     * @param ray
+     * @return the intersection between the ray and the triangle
+     */
     @Override
     public List<GeoPoint> findIntsersections(Ray ray) {
         List<GeoPoint> intersections = _plane.findIntsersections(ray);
