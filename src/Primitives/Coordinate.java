@@ -52,6 +52,10 @@ public final class Coordinate {
         return isZero(_coord - ((Coordinate)obj)._coord);/**checks if have the same value*/
     }
 
+    /**
+     * to string func for coordinates
+     * @return
+     */
     @Override
     public String toString() {
         return "" + _coord;
