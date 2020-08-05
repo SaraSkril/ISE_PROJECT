@@ -12,6 +12,7 @@ import java.util.Random;
 import static Primitives.Util.isZero;
 
 public class Camera {
+    private static final int k=80;
     private static final Random rnd = new Random();//we dicided to do the beam of rays in a random position (best option)
     Point3D _p0;
     Vector _vTo;
@@ -79,9 +80,12 @@ public class Camera {
 
     }
 
+
+
     public List<Ray> constructRayBeamThroughPixel(int nX, int nY, int j, int i,
                                                   double screenDistance, double screenWidth, double screenHeight,
-                                                  double density, int amount) {
+                                                  double density)
+    {
         if (isZero(screenDistance)) {
             throw new IllegalArgumentException("distance cannot be 0");
         }
@@ -106,10 +110,30 @@ public class Camera {
         }
 
         //antialiasing density >= 1
-        double radius = (Rx + Ry) / 2d * density;
+        double radius = ((Rx + Ry) / 2d) * density;
 
 
-        for (int counter = 0; counter < amount; counter++) {
+        /*if (!ON_OFF) {//using dry
+            rays.add(constructRayThroughPixel(nX, nY, j, i, screenDistance, screenWidth, screenHeight));
+            return rays;
+        }
+        for(int tempI=i-(int)density;tempI<i+(int)density;tempI+=7)
+        {
+            for(int tempJ=j-(int)density;tempJ<j+(int)density;tempJ+=7) {
+                Point3D point=new Point3D(tempI,tempJ,Pij.get_z().get());
+                rays.add(new Ray(_p0, point.subtract(_p0)));
+            }
+
+
+        }
+        /*for(int tempJ=j-7;tempJ<j+7;tempJ++)
+        {
+            Point3D point = new Point3D(i,tempJ,Pij.get_z().get());
+            rays.add(new Ray(_p0, point.subtract(_p0)));
+        }
+*/
+
+        for (int counter = 0; counter < k; counter++) {
             Point3D point = new Point3D(Pij);
             double cosTheta = 2 * rnd.nextDouble() - 1;
             double sinTheta = Math.sqrt(1d - cosTheta * cosTheta);

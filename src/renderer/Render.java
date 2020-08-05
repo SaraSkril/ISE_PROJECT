@@ -21,15 +21,15 @@ public class Render {
     private final ImageWriter _imageWriter;
     private final Scene _scene;
 
-    private double _supersamplingDensity = 0d;
-    private int _rayCounter = 1;
+    private double _supersamplingDensity = 4d;
+    private boolean On_OFF = false;
 
     private static final double DELTA = 0.1;
 
     public Render(ImageWriter imageWriter, Scene scene) {
         this._imageWriter = imageWriter;
         this._scene = scene;
-        this._supersamplingDensity = 0d;
+
     }
 
     public double getSupersamplingDensity() {
@@ -41,12 +41,12 @@ public class Render {
         return this;
     }
 
-    public int getRayCounter() {
-        return _rayCounter;
+    public boolean getOn_OFF() {
+        return On_OFF;
     }
 
-    public Render setRayCounter(int rayCounter) {
-        _rayCounter = rayCounter;
+    public Render setOn_OFF(boolean ON_OFF) {
+        On_OFF = ON_OFF;
         return this;
     }
 
@@ -66,30 +66,7 @@ public class Render {
         _imageWriter.writeToImage();
     }
 
-    /*public void renderImage() {
-        Camera camera = _scene.get_camera();
-        Intersectable geometries = _scene.get_geometries();
-        java.awt.Color background = _scene.get_background().getColor();
-        AmbientLight ambientLight = _scene.get_ambientLight();
-        double distance = _scene.get_distance();
 
-        int Nx = _imageWriter.getNx();
-        int Ny = _imageWriter.getNy();
-        double width = _imageWriter.getWidth();
-        double height = _imageWriter.getHeight();
-
-        for (int row = 0; row < Ny; row++) {
-            for (int collumn = 0; collumn < Nx; collumn++) {
-                Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
-                GeoPoint closestPoint = findClosestIntersection(ray);
-                if (closestPoint == null) {
-                    _imageWriter.writePixel(collumn, row, background);
-                } else {
-                    _imageWriter.writePixel(collumn, row, calcColor(closestPoint, ray).getColor());
-                }
-            }
-        }
-    }*/
     public void renderImage() {
         Camera camera = _scene.get_camera();
         Intersectable geometries = _scene.get_geometries();
@@ -102,7 +79,7 @@ public class Render {
         double width = _imageWriter.getWidth();
         double height = _imageWriter.getHeight();
 
-        if (_supersamplingDensity == 0d) {
+        if (On_OFF==false) {
             for (int row = 0; row < Ny; row++) {
                 for (int collumn = 0; collumn < Nx; collumn++) {
                     Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
@@ -114,20 +91,25 @@ public class Render {
                     }
                 }
             }
-        } else {    //supersampling
+        }
+        else
+            {    //supersampling
             for (int row = 0; row < Ny; row++) {
                 for (int collumn = 0; collumn < Nx; collumn++) {
                     Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
                     GeoPoint centerPoint = findClosestIntersection(ray);
                     Color Bckg = new Color(background);
                     Color averageColor = Color.BLACK;
-                    List<Ray> rayBeam = camera.constructRayBeamThroughPixel(Nx, Ny, collumn, row, distance, width, height, _supersamplingDensity, _rayCounter);
+                    List<Ray> rayBeam = camera.constructRayBeamThroughPixel(Nx, Ny, collumn, row, distance, width, height, _supersamplingDensity);
                     rayBeam.add(ray);
                     _imageWriter.writePixel(collumn, row, calcColor(rayBeam).getColor());
                 }
             }
         }
+
     }
+
+
 
     private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
 
