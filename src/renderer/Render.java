@@ -17,8 +17,13 @@ import static Primitives.Util.isZero;
 public class Render {
     private static final int MAX_CALC_COLOR_LEVEL = 10;
     private static final double MIN_CALC_COLOR_K = 0.001;
-
+    /**
+     * image writer parameter
+     */
     private final ImageWriter _imageWriter;
+    /**
+     * scene parameter
+     */
     private final Scene _scene;
 
     private double _supersamplingDensity = 4d;
@@ -26,30 +31,57 @@ public class Render {
 
     private static final double DELTA = 0.1;
 
+    /**
+     * render constructor
+     * @param imageWriter
+     * @param scene
+     */
     public Render(ImageWriter imageWriter, Scene scene) {
         this._imageWriter = imageWriter;
         this._scene = scene;
 
     }
 
+    /**
+     *
+     * @return supersampling density
+     */
     public double getSupersamplingDensity() {
         return _supersamplingDensity;
     }
 
+    /**
+     *
+     * @param supersamplingDensity
+     */
     public Render setSupersamplingDensity(double supersamplingDensity) {
         _supersamplingDensity = supersamplingDensity;
         return this;
     }
 
+    /**
+     * tells if supersampling is on or off
+     * @return on or off
+     */
     public boolean getOn_OFF() {
         return On_OFF;
     }
 
+    /**
+     *
+     * @param ON_OFF
+     * sets if supersampling is on or off
+     */
     public Render setOn_OFF(boolean ON_OFF) {
         On_OFF = ON_OFF;
         return this;
     }
 
+    /**
+     *
+     * @param interval
+     * @param color
+     */
     public void printGrid(int interval, java.awt.Color color) {
         int Nx = _imageWriter.getNx();
         int Ny = _imageWriter.getNy();
@@ -62,11 +94,16 @@ public class Render {
         }
     }
 
+    /**
+     *
+     */
     public void writeToImage() {
         _imageWriter.writeToImage();
     }
 
-
+    /**
+     * render image function realizing the image
+     */
     public void renderImage() {
         Camera camera = _scene.get_camera();
         Intersectable geometries = _scene.get_geometries();
@@ -94,6 +131,7 @@ public class Render {
         }
         else
             {    //supersampling
+
             for (int row = 0; row < Ny; row++) {
                 for (int collumn = 0; collumn < Nx; collumn++) {
                     Ray ray = camera.constructRayThroughPixel(Nx, Ny, collumn, row, distance, width, height);
