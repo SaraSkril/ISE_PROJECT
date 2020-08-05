@@ -5,7 +5,13 @@ import Primitives.Color;
 import Primitives.Point3D;
 import Primitives.Vector;
 
+/**
+ * directional light class
+ */
 public class DirectionalLight extends Light implements LightSource {
+    /**
+     * the direction of the light
+     */
     private final Vector _direction;
 
     /**
@@ -15,7 +21,6 @@ public class DirectionalLight extends Light implements LightSource {
      * @param colorintensity intensity of the light
      * @param direction      direction vector
      */
-
     public DirectionalLight(Color colorintensity, Vector direction) {
         _intensity = colorintensity;
         _direction = direction.normalized();
@@ -32,10 +37,22 @@ public class DirectionalLight extends Light implements LightSource {
     }
 
     //instead of getDirection()
+
+    /**
+     *
+     * @param p the lighted point
+     * @return the direction of the light
+     */
     @Override
     public Vector getL(Point3D p) {
         return _direction;
     }
+
+    /**
+     *
+     * @param point
+     * @return the distance betweeen
+     */
     @Override
     public double getDistance(Point3D point) {
         return Double.POSITIVE_INFINITY;

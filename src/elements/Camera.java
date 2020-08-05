@@ -10,15 +10,37 @@ import java.util.List;
 import java.util.Random;
 
 import static Primitives.Util.isZero;
-
+/**
+ * camera class represents a camera in the scene.
+ * @author the quad
+ *
+ */
 public class Camera {
     private static final int k=80;
     private static final Random rnd = new Random();//we dicided to do the beam of rays in a random position (best option)
+    /**
+     * _p0 is the location of the camera
+     */
     Point3D _p0;
+    /**
+     * vector to
+     */
     Vector _vTo;
+    /**
+     * vector up
+     */
     Vector _vUp;
+    /**
+     * vector right
+     */
     Vector _vRight;
 
+    /**
+     * camera constructor
+     * @param _p0
+     * @param _vTo
+     * @param _vUp
+     */
     public Camera(Point3D _p0, Vector _vTo, Vector _vUp) {
 
         //if the the vectors are not orthogonal, throw exception.
@@ -33,23 +55,49 @@ public class Camera {
 
     }
 
-
+    /**
+     *
+     * @return camera location
+     */
     public Point3D get_p0() {
         return new Point3D(_p0);
     }
 
+    /**
+     *
+     * @return vector to
+     */
     public Vector get_vTo() {
         return new Vector(_vTo);
     }
 
+    /**
+     *
+     * @return vector up
+     */
     public Vector get_vUp() {
         return new Vector(_vUp);
     }
 
+    /**
+     *
+     * @return vector right
+     */
     public Vector get_vRight() {
         return new Vector(_vRight);
     }
 
+    /**
+     * construct ray through pixel
+     * @param nX
+     * @param nY
+     * @param j
+     * @param i
+     * @param screenDistance
+     * @param screenWidth
+     * @param screenHeight
+     * @return
+     */
     public Ray constructRayThroughPixel(int nX, int nY,
                                         int j, int i, double screenDistance,
                                         double screenWidth, double screenHeight) {
@@ -81,7 +129,18 @@ public class Camera {
     }
 
 
-
+    /**
+     * construct ray beam through pixel, for supersampling
+     * @param nX
+     * @param nY
+     * @param j
+     * @param i
+     * @param screenDistance
+     * @param screenWidth
+     * @param screenHeight
+     * @param density
+     * @return
+     */
     public List<Ray> constructRayBeamThroughPixel(int nX, int nY, int j, int i,
                                                   double screenDistance, double screenWidth, double screenHeight,
                                                   double density)
