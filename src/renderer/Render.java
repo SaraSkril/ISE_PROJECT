@@ -12,7 +12,8 @@ import static Primitives.Util.alignZero;
 import static Primitives.Util.isZero;
 
 /**
- *
+ * class renderer create the image and Realizing the picture
+ * @author the quad
  */
 public class Render {
     private static final int MAX_CALC_COLOR_LEVEL = 10;
@@ -28,7 +29,10 @@ public class Render {
 
     private double _supersamplingDensity = 4d;
     private boolean On_OFF = false;
-
+    /**
+     * Fixed variable for moving
+     * first rays for shading, transparency and reflection
+     */
     private static final double DELTA = 0.1;
 
     /**
@@ -95,7 +99,7 @@ public class Render {
     }
 
     /**
-     *
+     * writes to image
      */
     public void writeToImage() {
         _imageWriter.writeToImage();
@@ -130,7 +134,7 @@ public class Render {
             }
         }
         else
-            {    //supersampling
+        {    //supersampling
 
             for (int row = 0; row < Ny; row++) {
                 for (int collumn = 0; collumn < Nx; collumn++) {
@@ -148,7 +152,11 @@ public class Render {
     }
 
 
-
+    /**
+     *
+     * @param intersectionPoints
+     * @return closest point
+     */
     private GeoPoint getClosestPoint(List<GeoPoint> intersectionPoints) {
 
         if (intersectionPoints == null) {
@@ -202,6 +210,12 @@ public class Render {
         }
         return closestPoint;
     }
+
+    /**
+     * Calculate the specific color
+     * @param inRay
+     * @return the Calculation of the specific color
+     */
     private Color calcColor(List<Ray> inRay) {
         Color bkg = _scene.get_background();
         Color color = Color.BLACK;
@@ -214,12 +228,26 @@ public class Render {
         return (size == 1) ? color : color.reduce(size);
     }
 
+    /**
+     *  Calculate the specific color
+     * @param geoPoint
+     * @param inRay
+     * @return the Calculation of the specific color
+     */
     private Color calcColor(GeoPoint geoPoint, Ray inRay) {
         Color color = calcColor(geoPoint, inRay, MAX_CALC_COLOR_LEVEL, 1.0);
         color = color.add(_scene.get_ambientLight().getIntensity());
         return color;
     }
 
+    /**
+     * Calculate the specific color
+     * @param geoPoint
+     * @param inRay
+     * @param level
+     * @param k
+     * @return the Calculation of the specific color
+     */
     private Color calcColor(GeoPoint geoPoint, Ray inRay, int level, double k) {
         if (level == 1 || k < MIN_CALC_COLOR_K) {
             return Color.BLACK;
@@ -266,6 +294,19 @@ public class Render {
         return result;
     }
 
+    /**
+     *
+     * @param geoPoint
+     * @param k
+     * @param result
+     * @param v
+     * @param n
+     * @param nv
+     * @param nShininess
+     * @param kd
+     * @param ks
+     * @return light source color
+     */
     private Color getLightSourcesColors(GeoPoint geoPoint, double k, Color result, Vector v, Vector n, double nv, int nShininess, double kd, double ks) {
         Point3D pointGeo = geoPoint.getPoint();
         List<LightSource> lightSources = _scene.get_lights();
@@ -289,10 +330,24 @@ public class Render {
         return result;
     }
 
+    /**
+     * construct a refracted ray
+     * @param pointGeo
+     * @param inRay
+     * @param n
+     * @return refracted ray
+     */
     private Ray constructRefractedRay(Point3D pointGeo, Ray inRay, Vector n) {
         return new Ray(pointGeo, inRay.get_direction(), n);
     }
 
+    /**
+     * construct a Reflected Ray
+     * @param pointGeo
+     * @param inRay
+     * @param n
+     * @return reflected ray
+     */
     private Ray constructReflectedRay(Point3D pointGeo, Ray inRay, Vector n) {
         //𝒓=𝒗 −𝟐∙(𝒗∙𝒏)∙𝒏
         Vector v = inRay.get_direction();
@@ -358,10 +413,23 @@ public class Render {
         return ip.scale(Math.abs(nl) * kd);
     }
 
+    /**
+     * Returns false  for negative number and true for positive number
+     * @param val
+     * @return true or false
+     */
     private boolean sign(double val) {
         return (val > 0d);
     }
 
+    /**
+     *
+     * @param light
+     * @param l
+     * @param n
+     * @param geopoint
+     * @return close intersection point
+     */
     private double transparency(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
@@ -384,6 +452,14 @@ public class Render {
         return ktr;
     }
 
+    /**
+     * checks if the point is shaded
+     * @param light
+     * @param l
+     * @param n
+     * @param geopoint
+     * @return true or false
+     */
     private boolean unshaded(LightSource light, Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geopoint.getPoint(), lightDirection, n);
