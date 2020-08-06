@@ -40,7 +40,7 @@ public class Polygon extends Geometry {
      *                                  <li>Three consequent vertices lay in the
      *                                  same line (180&#176; angle between two
      *                                  consequent edges)
-     *                                  <li>The polygon is concave (not convex></li>
+     *
      *                                  </ul>
      */
     public Polygon(Point3D... vertices) {
@@ -139,7 +139,7 @@ public class Polygon extends Geometry {
     /**
      *
      * @param point
-     * @return
+     * @return normal
      */
     @Override
     public Vector getNormal(Point3D point) {

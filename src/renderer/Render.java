@@ -349,7 +349,7 @@ public class Render {
      * @return reflected ray
      */
     private Ray constructReflectedRay(Point3D pointGeo, Ray inRay, Vector n) {
-        //𝒓=𝒗 −𝟐∙(𝒗∙𝒏)∙𝒏
+
         Vector v = inRay.get_direction();
         double vn = v.dotProduct(n);
 

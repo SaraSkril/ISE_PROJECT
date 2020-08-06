@@ -94,7 +94,7 @@ public class Material {
 
     /**
      *
-     * @returnkT
+     * @return kT
      */
     public double getKt() {
         return _kt;

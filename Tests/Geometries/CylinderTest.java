@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class CylinderTest {
 
     /**
-     * Test method for {@Link geometries.Cylinder#getNormal(geometries.Cylinder)}
+     * Test method for { geometries.Cylinder#getNormal(geometries.Cylinder)}
      */
     @Test
    public  void getNormal() {
